@@ -1,0 +1,73 @@
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+#splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+}
+
+#splash h1 {
+  font-size: 7rem;
+  font-weight: 900;
+  color: #cc0000;
+  text-shadow: 0 0 30px #ff0000, 0 0 60px #ff000088;
+  letter-spacing: 0.15em;
+  user-select: none;
+}
+
+#play-btn {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  padding: 0.9rem 3.5rem;
+  background: #cc0000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background 0.15s, transform 0.1s;
+}
+
+#play-btn:hover {
+  background: #ff0000;
+  transform: scale(1.04);
+}
+
+#play-btn:active {
+  transform: scale(0.97);
+}
+
+#dos-container {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#dos {
+  width: 100%;
+  height: 100%;
+}
+
+.hidden {
+  display: none !important;
+}

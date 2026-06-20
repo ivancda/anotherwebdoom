@@ -1,0 +1,12 @@
+# Dependências
+node_modules/
+
+# Arquivos do jogo (já empacotados em doom.jsdos)
+DOOM/*.EXE
+DOOM/*.WAD
+DOOM/*.DOC
+DOOM/*.TXT
+DOOM/*.CFG
+DOOM/*.STR
+DOOM/*.FRM
+DOOM/*.NUM
