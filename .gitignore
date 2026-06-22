@@ -2,6 +2,20 @@
 node_modules/
 
 # Arquivos do jogo (já empacotados em doom.jsdos)
+DOOM2/*.EXE
+DOOM2/*.WAD
+DOOM2/*.DOC
+DOOM2/*.TXT
+DOOM2/*.CFG
+DOOM2/*.STR
+DOOM2/*.FRM
+DOOM2/*.NUM
+DOOM2/*.DSG
+DOOM2/*.TMP
+DOOM2/*.RSP
+
+
+
 DOOM/*.EXE
 DOOM/*.WAD
 DOOM/*.DOC
@@ -10,3 +24,4 @@ DOOM/*.CFG
 DOOM/*.STR
 DOOM/*.FRM
 DOOM/*.NUM
+

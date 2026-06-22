@@ -34,11 +34,51 @@ html, body {
   user-select: none;
 }
 
-#play-btn {
-  font-size: 1.4rem;
+#game-list {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.game-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 2rem 2.5rem;
+  border: 2px solid #cc0000;
+  background: #0d0000;
+  min-width: 220px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.game-card:hover {
+  border-color: #ff0000;
+  box-shadow: 0 0 20px #ff000055;
+}
+
+.game-card-title {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #ff2222;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.game-card-sub {
+  font-size: 0.8rem;
+  color: #888;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.play-btn {
+  margin-top: 0.6rem;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.2em;
-  padding: 0.9rem 3.5rem;
+  padding: 0.6rem 2.5rem;
   background: #cc0000;
   color: #fff;
   border: none;
@@ -47,12 +87,12 @@ html, body {
   transition: background 0.15s, transform 0.1s;
 }
 
-#play-btn:hover {
+.play-btn:hover {
   background: #ff0000;
   transform: scale(1.04);
 }
 
-#play-btn:active {
+.play-btn:active {
   transform: scale(0.97);
 }
 

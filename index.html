@@ -10,7 +10,18 @@
 <body>
   <div id="splash">
     <h1>DOOM</h1>
-    <button id="play-btn">PLAY</button>
+    <div id="game-list">
+      <div class="game-card" data-bundle="doom.jsdos" data-id="doom1">
+        <div class="game-card-title">DOOM</div>
+        <div class="game-card-sub">Knee-Deep in the Dead &middot; 1993</div>
+        <button class="play-btn">PLAY</button>
+      </div>
+      <div class="game-card" data-bundle="doom2.jsdos" data-id="doom2">
+        <div class="game-card-title">DOOM II</div>
+        <div class="game-card-sub">Hell on Earth &middot; 1994</div>
+        <button class="play-btn">PLAY</button>
+      </div>
+    </div>
   </div>
   <div id="dos-container" class="hidden">
     <div id="dos"></div>
