@@ -10,7 +10,6 @@ html, body {
   background: #000;
   color: #fff;
   font-family: Arial, sans-serif;
-  overflow: hidden;
 }
 
 #splash {
@@ -23,6 +22,8 @@ html, body {
   align-items: center;
   justify-content: center;
   gap: 2.5rem;
+  overflow-y: auto;
+  padding: 2rem 1rem;
 }
 
 #splash h1 {
