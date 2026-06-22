@@ -30,6 +30,34 @@
   </div>
   <div id="dos-container" class="hidden">
     <div id="dos"></div>
+    <button id="btn-fullscreen" aria-label="Fullscreen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20">
+        <polyline points="15 3 21 3 21 9"/>
+        <polyline points="9 21 3 21 3 15"/>
+        <line x1="21" y1="3" x2="14" y2="10"/>
+        <line x1="3" y1="21" x2="10" y2="14"/>
+      </svg>
+    </button>
+    <div id="virtual-pad">
+      <div id="dpad">
+        <button class="pad-btn" id="btn-up"    data-key="265">&#9650;</button>
+        <button class="pad-btn" id="btn-left"  data-key="263">&#9664;</button>
+        <button class="pad-btn" id="btn-right" data-key="262">&#9654;</button>
+        <button class="pad-btn" id="btn-down"  data-key="264">&#9660;</button>
+      </div>
+      <div id="action-btns">
+        <div id="action-top">
+          <button class="pad-btn pad-sm" data-key="256">ESC</button>
+          <button class="pad-btn pad-sm" data-key="257">ENT</button>
+          <button class="pad-btn pad-sm" data-key="340" data-toggle="true">RUN</button>
+          <button class="pad-btn pad-sm" data-key="342" data-toggle="true">STR</button>
+        </div>
+        <div id="action-bottom">
+          <button class="pad-btn pad-md" data-key="32">USE</button>
+          <button class="pad-btn" id="btn-fire" data-key="341">FIRE</button>
+        </div>
+      </div>
+    </div>
   </div>
   <script src="vendor/js-dos/js-dos.js"></script>
   <script src="app.js"></script>

@@ -1,4 +1,4 @@
-const SAVE_INTERVAL_MS = 10000;
+const SAVE_INTERVAL_MS = 3000;
 
 function getSaveKey(gameId) {
   return `doom_fs_${gameId}`;
@@ -21,6 +21,37 @@ async function saveChangesToStorage(ci, gameId) {
   localStorage.setItem(getSaveKey(gameId), b64);
 }
 
+document.getElementById('btn-fullscreen').addEventListener('click', () => {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(() => {});
+  } else {
+    document.exitFullscreen();
+  }
+});
+
+function setupVirtualPad(ci) {
+  document.querySelectorAll('#virtual-pad [data-key]').forEach(btn => {
+    const key = parseInt(btn.dataset.key, 10);
+
+    if (btn.dataset.toggle) {
+      let active = false;
+      btn.addEventListener('pointerdown', e => {
+        e.preventDefault();
+        active = !active;
+        ci.sendKeyEvent(key, active);
+        btn.classList.toggle('pad-active', active);
+      }, { passive: false });
+    } else {
+      const press   = e => { e.preventDefault(); ci.sendKeyEvent(key, true); };
+      const release = e => { e.preventDefault(); ci.sendKeyEvent(key, false); };
+      btn.addEventListener('pointerdown',   press,   { passive: false });
+      btn.addEventListener('pointerup',     release, { passive: false });
+      btn.addEventListener('pointercancel', release, { passive: false });
+      btn.addEventListener('pointerleave',  release, { passive: false });
+    }
+  });
+}
+
 document.querySelectorAll('.play-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const card = btn.closest('.game-card');
@@ -40,6 +71,7 @@ document.querySelectorAll('.play-btn').forEach(btn => {
       initFs: savedChanges ?? undefined,
       onEvent: (event, ci) => {
         if (event === 'ci-ready') {
+          setupVirtualPad(ci);
           const interval = setInterval(() => saveChangesToStorage(ci, gameId), SAVE_INTERVAL_MS);
           ci.events().onUnload(async () => {
             clearInterval(interval);
