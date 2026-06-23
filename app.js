@@ -1,5 +1,9 @@
 const SAVE_INTERVAL_MS = 3000;
 
+if (navigator.maxTouchPoints > 0 || 'ontouchstart' in window) {
+  document.body.classList.add('touch-device');
+}
+
 function getSaveKey(gameId) {
   return `doom_fs_${gameId}`;
 }

@@ -119,29 +119,40 @@ html, body {
   display: none;
 }
 
-@media (hover: none) and (pointer: coarse) {
-  #btn-fullscreen {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 40px;
-    height: 40px;
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    color: #fff;
-    cursor: pointer;
-    z-index: 20;
-    -webkit-tap-highlight-color: transparent;
-  }
+body.touch-device #btn-fullscreen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  z-index: 20;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* ── Virtual pad ──────────────────────────────────────── */
+/* ── Virtual pad (touch devices only) ─────────────────── */
 #virtual-pad {
   display: none;
+}
+
+body.touch-device #virtual-pad {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px 20px 28px;
+  justify-content: space-between;
+  align-items: flex-end;
+  pointer-events: none;
+  z-index: 10;
 }
 
 #dpad {
