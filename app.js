@@ -30,7 +30,57 @@ document.getElementById('btn-fullscreen').addEventListener('click', () => {
 });
 
 function setupVirtualPad(ci) {
-  document.querySelectorAll('#virtual-pad [data-key]').forEach(btn => {
+  // D-pad: suporte a deslizar o dedo entre direcionais
+  const dpad = document.getElementById('dpad');
+  let dpadKey = null;
+  let dpadBtn = null;
+
+  function activateDpadBtn(btn) {
+    const key = parseInt(btn.dataset.key, 10);
+    if (key === dpadKey) return;
+    if (dpadKey !== null) {
+      ci.sendKeyEvent(dpadKey, false);
+      dpadBtn.classList.remove('pad-active');
+    }
+    dpadKey = key;
+    dpadBtn = btn;
+    ci.sendKeyEvent(key, true);
+    btn.classList.add('pad-active');
+  }
+
+  function releaseDpad() {
+    if (dpadKey !== null) {
+      ci.sendKeyEvent(dpadKey, false);
+      dpadBtn.classList.remove('pad-active');
+      dpadKey = null;
+      dpadBtn = null;
+    }
+  }
+
+  dpad.addEventListener('pointerdown', e => {
+    e.preventDefault();
+    dpad.setPointerCapture(e.pointerId);
+    const btn = e.target.closest('[data-key]');
+    if (btn) activateDpadBtn(btn);
+  }, { passive: false });
+
+  dpad.addEventListener('pointermove', e => {
+    if (!dpad.hasPointerCapture(e.pointerId)) return;
+    e.preventDefault();
+    const el = document.elementFromPoint(e.clientX, e.clientY);
+    const btn = el && el.closest('#dpad [data-key]');
+    if (btn) {
+      activateDpadBtn(btn);
+    } else {
+      releaseDpad();
+    }
+  }, { passive: false });
+
+  dpad.addEventListener('pointerup',     e => { e.preventDefault(); releaseDpad(); }, { passive: false });
+  dpad.addEventListener('pointercancel', () => releaseDpad());
+
+  // Botões de ação: comportamento normal
+  document.querySelectorAll('#action-btns [data-key]').forEach(btn => {
     const key = parseInt(btn.dataset.key, 10);
 
     if (btn.dataset.toggle) {

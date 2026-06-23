@@ -138,24 +138,9 @@ html, body {
   }
 }
 
-/* ── Virtual pad (touch devices only) ─────────────────── */
+/* ── Virtual pad ──────────────────────────────────────── */
 #virtual-pad {
   display: none;
-}
-
-@media (hover: none) and (pointer: coarse) {
-  #virtual-pad {
-    display: flex;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 12px 20px 28px;
-    justify-content: space-between;
-    align-items: flex-end;
-    pointer-events: none;
-    z-index: 10;
-  }
 }
 
 #dpad {
@@ -175,6 +160,11 @@ html, body {
 #btn-right { grid-area: right; }
 #btn-down  { grid-area: down; }
 
+@media (max-width: 600px) {
+  #action-btns {
+    margin-bottom: 100px;
+  }
+}
 #action-btns {
   display: flex;
   flex-direction: column;
@@ -210,8 +200,16 @@ html, body {
   transition: background 0.08s;
 }
 
+/* Botões de ação: feedback via :active do browser */
 .pad-btn:active {
   background: rgba(220, 0, 0, 0.9);
+}
+
+/* D-pad: feedback controlado 100% pelo JS (pad-active).
+   Neutraliza :active para que o browser não mantenha o
+   visual aceso no botão original após o dedo deslizar. */
+#dpad .pad-btn:active {
+  background: rgba(100, 0, 0, 0.65);
 }
 
 .pad-active {
@@ -243,4 +241,122 @@ html, body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   background: rgba(180, 0, 0, 0.75);
+}
+
+/* ── PORTRAIT mobile ──────────────────────────────────────
+   Game on top, controls in their own space below.
+   All sizes relative to vw so every phone fits.
+────────────────────────────────────────────────────────── */
+@media (hover: none) and (pointer: coarse) and (orientation: portrait) {
+  #dos-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #dos {
+    flex: 1 1 0;
+    height: auto;
+    min-height: 0;
+  }
+
+  #virtual-pad {
+    display: flex;
+    position: relative;
+    flex-shrink: 0;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 2vw 4vw 5vw;
+    background: #000;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  #dpad {
+    grid-template-columns: repeat(3, 14vw);
+    grid-template-rows: repeat(3, 14vw);
+    gap: max(2px, 0.7vw);
+  }
+
+  .pad-btn {
+    width: 14vw;
+    height: 14vw;
+    font-size: clamp(0.9rem, 4.5vw, 1.6rem);
+    border-radius: max(6px, 1vw);
+  }
+
+  .pad-sm {
+    width: 11.5vw;
+    height: 10vw;
+    font-size: clamp(0.4rem, 2vw, 0.72rem);
+  }
+
+  .pad-md {
+    width: 14.5vw;
+    height: 14vw;
+    font-size: clamp(0.45rem, 2vw, 0.75rem);
+  }
+
+  #btn-fire {
+    width: 20vw;
+    height: 14vw;
+    font-size: clamp(0.6rem, 2.5vw, 0.9rem);
+  }
+
+  #action-btns    { gap: max(3px, 1vw); }
+  #action-top,
+  #action-bottom  { gap: max(3px, 1vw); }
+}
+
+/* ── LANDSCAPE mobile ─────────────────────────────────────
+   Game fills the screen, controls overlaid at the bottom.
+   All sizes relative to vh (height is the constraint).
+────────────────────────────────────────────────────────── */
+@media (hover: none) and (pointer: coarse) and (orientation: landscape) {
+  #virtual-pad {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1vh 3vw 2.5vh;
+    justify-content: space-between;
+    align-items: flex-end;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  #dpad {
+    grid-template-columns: repeat(3, 12vh);
+    grid-template-rows: repeat(3, 12vh);
+    gap: max(2px, 0.6vh);
+  }
+
+  .pad-btn {
+    width: 12vh;
+    height: 12vh;
+    font-size: clamp(0.85rem, 4vh, 1.4rem);
+    border-radius: max(5px, 0.8vh);
+  }
+
+  .pad-sm {
+    width: 10vh;
+    height: 9vh;
+    font-size: clamp(0.38rem, 1.6vh, 0.65rem);
+  }
+
+  .pad-md {
+    width: 13vh;
+    height: 12vh;
+    font-size: clamp(0.42rem, 1.7vh, 0.68rem);
+  }
+
+  #btn-fire {
+    width: 19vh;
+    height: 12vh;
+    font-size: clamp(0.58rem, 2.2vh, 0.85rem);
+  }
+
+  #action-btns    { gap: max(3px, 0.8vh); }
+  #action-top,
+  #action-bottom  { gap: max(3px, 0.8vh); }
 }
